@@ -30,6 +30,30 @@
                 $mail->isSMTP(); 
                 $mail->SMTPAuth   = true; 
 
+                $mail->Host = 'smtp.gmail.com';
+                $mail->Username = 'alauddin5326@gmail.com';
+                $mail->Password = 'Alauddin5326@.';
+
+                $mail->SMTPSecure = 'tls';
+                $mail->Port = 587;
+
+                $mail->setFrom('alauddin5326@gmail.com', $name);
+                $mail->addAddress($email);
+
+                $mail->isHTML(true);
+                $mail->Subject = 'Email Varification From Web Master';
+
+                $email_template ="<h2>You HAve Register with web master</h2>
+                <h5>Verify your email address to login please click the link below</h5>
+                <a href='http://localhost/pweb/admin/varifi-email.php?token=$v_token'>click Here</a>";
+            
+
+                    
+                $mail->Body = $email_template;
+                $mail->send();
+                //echo ""Email has bean sent";
+                
+
             }
           
             $name = $this->fr->validation($data['name']);
@@ -51,14 +75,14 @@
                     return $error;
                     header("location:register.php");
                 }else{
-                    $insert_query = "INSERT INTO tbl_user(name, email, phone, password, v_token) VALUES('$name', '$email', '$phone', 'password, '$v_token')";
+                    $insert_query = "INSERT INTO tbl_user(username, email, phone, password, v_token) VALUES('$name', '$email', '$phone', 'password, '$v_token')";
 
                     $insert_row = $this->db->insert($insert_query);
 
                     if ($insert_row) {
                         sendemail_varifi($name, $email, $v_token);
-                        $sucess = "Resistration Sucessfull. Plase check your email inbox for varifi email";
-                        return $sucess;
+                        $success = "Resistration Sucessfull. Plase check your email inbox for varifi email";
+                        return $success;
                     }else {
                         $error = "Registration Failed";
                         return $error;
