@@ -45,7 +45,7 @@
 
                 $email_template ="<h2>You HAve Register with web master</h2>
                 <h5>Verify your email address to login please click the link below</h5>
-                <a href='http://localhost/pweb/admin/varifi-email.php?token=$v_token'>click Here</a>";
+                <a href='http://localhost/pweb/admin/verifi-email.php?token=$v_token'>click Here</a>";
             
 
                     
@@ -70,12 +70,13 @@
                 $e_query = "SELECT * FROM tbl_user WHERE email='$email'";
                 $check_email = $this->db->select($e_query);
 
-                if ($check_email > 0) {
+            
+                if($check_email  > 0) {
                     $error = "This Email Is Alrady Exisit";
                     return $error;
                     header("location:register.php");
                 }else{
-                    $insert_query = "INSERT INTO tbl_user(username, email, phone, password, v_token) VALUES('$name', '$email', '$phone', 'password, '$v_token')";
+                    $insert_query = "INSERT INTO tbl_user(username, email, phone, password, v_token) VALUES('$name', '$email', '$phone', '$password', '$v_token')";
 
                     $insert_row = $this->db->insert($insert_query);
 

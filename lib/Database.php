@@ -25,7 +25,7 @@
 
         //Select Query:
         public function select($query){
-            $result = mysqli_query($this-link, $query) or die ($this->link->error.__LINE__);
+            $result = mysqli_query($this->link, $query) or die ($this->link->error.__LINE__);
             if (mysqli_num_rows($result)>0) {
                 return $result;
             }else {
@@ -35,16 +35,17 @@
 
         //Insert Query:
         public function insert($query){
-            $result = mysqli_query($this-link, $query) or die ($this->link->error.__LINE__);
+            $result = mysqli_query($this->link, $query) or die ($this->link->error.__LINE__);
             if ($result) {
                 return $result;
             }else {
                 return false;
             }
         }
+        
          //Update Query:
          public function update($query){
-            $result = mysqli_query($this-link, $query) or die ($this->link->error.__LINE__);
+            $result = mysqli_query($this->link, $query) or die ($this->link->error.__LINE__);
             if ($result) {
                 return $result;
             }else {
@@ -54,7 +55,7 @@
 
         //Delete Query:
         public function delete($query){
-            $result = mysqli_query($this-link, $query) or die ($this->link->error.__LINE__);
+            $result = mysqli_query($this->link, $query) or die ($this->link->error.__LINE__);
             if ($result) {
                 return $result;
             }else {

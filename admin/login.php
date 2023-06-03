@@ -1,3 +1,23 @@
+
+<?php
+
+include_once '../classes/Adminlogin.php';
+$al = new AdminLogin();
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+// echo '<pre>';
+//       print_r($_POST);
+//       die();
+        $email = $_POST['email'];
+        $password = md5($_POST['password']);
+
+        $chkLogin = $al->LoginUser($email, $password);
+    }
+
+
+?>
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -16,18 +36,37 @@
         <div class="container py-5">
             <div class="row d-flex justify-content-center">
                 <div class="col-md-6">
+
+                <spam>
+
+                      <?php
+                      if (isset($_SESSION['status'])) {
+                      ?>  
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <?=$_SESSION['status'] ?>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                      <?php
+                      }
+                      ?>
+                      
+                    </spam>
+
+
                     <div class="card">
                         <h5 class="card-header">Login Form</h5>
                         <div class="card-body">
-                            <form>
+                            <form method="POST">
                             <div class="form-group">
                                   <label>Email address</label>
-                                  <input type="email" name="email" class="form-control" >
+                                  <input value="alauddin5326@gmail.com" type="email" name="email" class="form-control" >
                                 </div>
 
                                 <div class="form-group">
                                   <label>Password</label>
-                                  <input type="Password" name="Password" class="form-control" >
+                                  <input value="123456" type="Password" name="password" class="form-control" >
                                 </div>
                                 
                             <button type="submit" class="btn btn-success">Login</button>  
